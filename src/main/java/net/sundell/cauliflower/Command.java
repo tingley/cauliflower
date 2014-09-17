@@ -80,12 +80,12 @@ public abstract class Command {
         HelpFormatter f = new HelpFormatter();
         f.printHelp(out,
                     78,
-                    cli.getName() + " " + getUsageLine(),
+                    getCLI().getName() + " " + getUsageLine(),
                     "", // banner
                     getOptions(),
                     4, // left pad
-                    0, // description pad
-                    "", // footer
+                    2, // description pad
+                    getUsageFooter(), // footer
                     false); // automatically generate usage
         printExtraHelp(out);
         System.exit(1);
@@ -100,6 +100,16 @@ public abstract class Command {
      */
     protected String getUsageLine() {
         return getName();
+    }
+
+    /**
+     * Get the footer to be displayed after usage text.  The default
+     * implementation returns the empty string.
+     *
+     * @return usage footer
+     */
+    protected String getUsageFooter() {
+        return "";
     }
 
     /**

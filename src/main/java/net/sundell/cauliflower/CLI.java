@@ -25,7 +25,7 @@ public abstract class CLI {
      * informational messages.  By default, it will return the name of the current
      * class. 
      */
-    protected String getName() {
+    public String getName() {
         return getClass().getName();
     }
 
@@ -77,7 +77,6 @@ public abstract class CLI {
             else {
                 throw new RuntimeException("Unimplemented");
             }
-            command.setCLI(this);
             command.setUserData(userData);
             command.handle(cl);
             if (userDataFile != null && userData.isDirty()) {
@@ -119,11 +118,11 @@ public abstract class CLI {
     }
 
     public PrintWriter getOutputWriter() {
-        return new PrintWriter(System.out);
+        return new PrintWriter(System.out, true);
     }
 
     public PrintWriter getErrorWriter() {
-        return new PrintWriter(System.err);
+        return new PrintWriter(System.err, true);
     }
 
     private Command getCommand(String cmd) {
@@ -132,6 +131,7 @@ public abstract class CLI {
             help();
         }
         command.setName(cmd);
+        command.setCLI(this);
         return command;
     }
 
