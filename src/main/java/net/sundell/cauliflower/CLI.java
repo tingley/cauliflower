@@ -74,9 +74,6 @@ public abstract class CLI {
                 }
                 userData = initializeUserData(UserData.loadProperties(userDataFile));
             }
-            else {
-                throw new RuntimeException("Unimplemented");
-            }
             command.setUserData(userData);
             command.handle(cl);
             if (userDataFile != null && userData.isDirty()) {
